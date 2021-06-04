@@ -22,24 +22,65 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 
+import com.codeborne.selenide.SelenideDriver;
 import io.github.bonigarcia.seljup.SeleniumExtension;
+
 
 @ExtendWith(SeleniumExtension.class)
 public class LocalWebDriverTest {
 
-    @Test
+   @Test
     public void testWithChrome(ChromeDriver chrome) {
         chrome.get("https://bonigarcia.github.io/selenium-jupiter/");
 
         assertTrue(chrome.getTitle().startsWith("Selenium-Jupiter"));
     }
 
-    @Test
+    //@Test
     public void testWithFirefox(FirefoxDriver firefox) {
         firefox.get("http://www.seleniumhq.org/");
 
         assertTrue(firefox.getTitle().startsWith("Selenium"));
     }
+	
+
+	
+	//@Test
+    void testSelenide(SelenideDriver driver) {
+        driver.open("https://bonigarcia.github.io/selenium-jupiter/");
+
+    }
+	
+	
+	@Test
+    void testWithTwoChromes(ChromeDriver driver1, ChromeDriver driver2) {
+        driver1.get("http://www.seleniumhq.org/");
+        driver2.get("http://junit.org/junit5/");
+        //assertThat(driver1.getTitle(), startsWith("Selenium"));
+        //assertThat(driver2.getTitle(), equalTo("JUnit 5"));
+    }
+	
+	@Test
+	public void testCie(ChromeDriver chrome) {
+		// Test name: TestCie
+		// Step # | name | target | value
+		// 1 | open | / | 
+		// chrome.get("https://bonigarcia.github.io/selenium-jupiter/");
+		chrome.get("https://www.macieenligne.ci/");
+		// 2 | setWindowSize | 1286x824 | 
+		chrome.manage().window().setSize(new Dimension(1286, 824));
+		
+		/*
+		// 3 | click | id=inscription | 
+		chrome.findElement(By.id("inscription")).click();
+		// 4 | click | css=.closesignup > img | 
+		chrome.findElement(By.cssSelector(".closesignup > img")).click();
+		// 5 | click | linkText=Infos utiles | 
+		chrome.findElement(By.linkText("Infos utiles")).click();
+		*/
+	}
 
 }
